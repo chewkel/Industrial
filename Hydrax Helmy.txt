@@ -1,0 +1,71 @@
+from playerio import *
+import discord
+from discord.ext import commands
+
+prefix = '!'
+bot = commands.Bot(command_prefix = prefix)
+token = 'NzUzMjUyNTYwMDg4ODU4Njk1.X1jfHQ.aYLECGDPpDl1G4QrWD17CaApzQ8'
+
+#Connect to the game with username and password. Throw away account provided.
+client = Client('hello-world-f8wdei2ucusdudkhbayw9g', 'nwordpass', 'nwordpass')
+
+@bot.command()
+async def online(ctx):
+
+    players_online = 0
+
+    for room in client.list_rooms('MyCode'):
+        players_online += room.players_online
+
+    players = f'{players_online}\n'
+
+    embed = discord.Embed(title = "Players Online", description = players, color=0xFF0000)
+    await ctx.send(embed = embed)
+
+@bot.command()
+async def skills(ctx, player: str):
+    
+    skills = client.bigdb_load('skillsData', player)
+    await ctx.send(skills)
+    
+@bot.command()
+async def proficency(ctx, player: str):
+    
+    pro = client.bigdb_load('proficiencyTable', player)
+    await ctx.send(pro)
+
+@bot.command()
+async def lottowiner(ctx):
+    
+    winners = client.bigdb_load('miscTable', 'lotteryWinners')
+    await ctx.send(winners)
+
+@bot.command()
+async def lottoinfo(ctx):
+    
+    info = client.bigdb_load('miscTable', 'lotteryInfo')
+    await ctx.send(info)
+
+@bot.command()
+async def playerinfo(ctx, player: str):
+    
+    info = client.bigdb_load('PlayerObjects', 'simple'+player)
+    await ctx.send(info)
+
+@bot.command()
+async def bank(ctx, player: str):
+    
+    info = client.bigdb_load('bankData', player)
+    await ctx.send(info)
+
+@bot.command()
+async def guild(ctx, guild: str):
+    
+    info = client.bigdb_load('guildsData', guild)
+    await ctx.send(info)
+
+@bot.event
+async def on_ready():
+    print('Ready')
+    
+bot.run(token)
