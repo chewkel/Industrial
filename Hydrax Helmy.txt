@@ -4,7 +4,7 @@ from discord.ext import commands
 
 prefix = '!'
 bot = commands.Bot(command_prefix = prefix)
-token = 'NzUzMjUyNTYwMDg4ODU4Njk1.X1jfHQ.aYLECGDPpDl1G4QrWD17CaApzQ8'
+token = 'Token'
 
 #Connect to the game with username and password. Throw away account provided.
 client = Client('hello-world-f8wdei2ucusdudkhbayw9g', 'nwordpass', 'nwordpass')
