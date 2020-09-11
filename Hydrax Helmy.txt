@@ -7,7 +7,7 @@ bot = commands.Bot(command_prefix = prefix)
 token = 'Token'
 
 #Connect to the game with username and password. Throw away account provided.
-client = Client('hello-world-f8wdei2ucusdudkhbayw9g', 'nwordpass', 'nwordpass')
+client = Client('hello-world-f8wdei2ucusdudkhbayw9g', 'username', 'password')
 
 @bot.command()
 async def online(ctx):
